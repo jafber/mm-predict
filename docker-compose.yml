@@ -25,5 +25,5 @@ services:
     ports:
       - "5173:5173"
     volumes:
-      - $PWD/conf:/etc/caddy
+      - $PWD/Caddyfile:/etc/caddy/conf
   

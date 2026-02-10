@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y build-essential curl
 COPY requirements.txt requirements-prod.txt .
 RUN pip install --no-cache-dir -r requirements.txt && pip install --no-cache-dir -r requirements-prod.txt
 
-COPY main.py .
+COPY *.py .
 
 ENV PYTHONUNBUFFERED=1
 

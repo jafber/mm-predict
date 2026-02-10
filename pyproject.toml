@@ -1,0 +1,12 @@
+[project]
+name = "myeloma-predict-core"
+version = "0.1.0"
+dependencies = [
+  "pydantic",
+  "numpy",
+  "pandas",
+  "lifelines"
+]
+
+[tool.setuptools.packages.find]
+where = ["core"]

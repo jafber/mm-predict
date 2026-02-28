@@ -1,16 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 import PatientForm from "./components/PatientForm";
 import PredictionResult from "./components/PredictionResult";
 import { requestPrediction } from "./api";
 import type { PatientFeatures, PredictionResponse } from "./types";
-
-const DEFAULT_FEATURES: PatientFeatures = {
-  Ancestry: 1,
-  Age: 65,
-  M_Spike: 0.5,
-  sFLC_Ratio: 1.5,
-  Creatinine: 1.0,
-};
 
 const DEBOUNCE_MS = 400;
 
@@ -19,6 +11,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const initialized = useRef(false);
 
   async function fetchPrediction(features: PatientFeatures) {
     setLoading(true);
@@ -33,14 +26,15 @@ export default function App() {
     }
   }
 
-  // Initial prediction on mount — PatientForm skips its first onChange call
-  useEffect(() => {
-    fetchPrediction(DEFAULT_FEATURES);
-  }, []);
-
+  // First call (on PatientForm mount) is immediate; subsequent changes are debounced.
   const handleChange = useCallback((features: PatientFeatures | null) => {
     if (!features) return;
     if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (!initialized.current) {
+      initialized.current = true;
+      fetchPrediction(features);
+      return;
+    }
     debounceRef.current = setTimeout(() => fetchPrediction(features), DEBOUNCE_MS);
   }, []);
 
@@ -56,7 +50,7 @@ export default function App() {
       <main className="max-w-6xl mx-auto p-4 sm:p-6 mt-4">
         <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-6">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <PatientForm onChange={handleChange} initialValues={DEFAULT_FEATURES} />
+            <PatientForm onChange={handleChange} />
           </div>
 
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 min-h-[400px] relative">

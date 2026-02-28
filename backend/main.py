@@ -1,19 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Request
-from pydantic import BaseModel
-from typing import Optional
-from datetime import date, timedelta
-from random import random
-from model import init_model, predict_risk_function
-import pandas as pd
-from artifacts import PatientFeatures, CoxBootstrapBundle
+from core.artifacts import PatientFeatures, CoxBootstrapBundle
 
 LOCAL_VITE_APP = "http://localhost:5173"
-MODEL_PATH = "../predictions/model/cox_bootstrap_bundle.pkl"
+MODEL_PATH = "../ml/models/cox_bootstrap_bundle.pkl"
 
 app = FastAPI()
-cox_bootstrap = CoxBootstrapBundle(MODEL_PATH)
+cox_bootstrap = CoxBootstrapBundle.load(MODEL_PATH)
 
 app.add_middleware(
     CORSMiddleware,
@@ -37,13 +31,14 @@ async def mm_predict(request: Request):
 
     try:
         user_data = PatientFeatures(**body)
-        cox_bootstrap.predict_cumulative_incidence(user_data)
+        prediction_df = cox_bootstrap.predict_cumulative_incidence(user_data)
     except Exception as e:
         print(f'got error {e} on input {body}')
+        return 400
 
     return {
-        "risk": risk_assessements,
-        "riskScore": sum([r["probability"] for r in risk_assessements]) / len(risk_assessements),
-        "overallVerdict": "Low Risk",
-        "detailedDescription": "Based on the provided parameters, the risk of progression is low",
+        "time": prediction_df.index.tolist(),
+        "risk": prediction_df["risk"].tolist(),
+        "ci_lower": prediction_df["ci_lower"].tolist(),
+        "ci_upper": prediction_df["ci_upper"].tolist(),
     }

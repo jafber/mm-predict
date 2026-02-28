@@ -1,0 +1,16 @@
+[project]
+name = "myeloma-predict-backend"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]",
+    "scikit-survival",
+    "pydantic",
+    "sentry-sdk",
+    "python-dotenv",
+    "uvicorn[standard]",
+    "myeloma-predict-core",
+]
+
+[tool.uv.sources]
+myeloma-predict-core = { path = "..", editable = true }

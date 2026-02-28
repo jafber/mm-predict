@@ -4,7 +4,8 @@ services:
   backend:
     image: jafber/myeloma-predict-backend
     build:
-      context: ./backend
+      context: .
+      dockerfile: backend/Dockerfile
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
 

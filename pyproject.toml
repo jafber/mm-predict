@@ -2,11 +2,16 @@
 name = "myeloma-predict-core"
 version = "0.1.0"
 dependencies = [
-  "pydantic",
-  "numpy",
-  "pandas",
-  "lifelines"
+    "pydantic",
+    "numpy",
+    "pandas",
+    "lifelines",
 ]
 
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [tool.setuptools.packages.find]
-where = ["core"]
+where = ["."]
+include = ["core*"]

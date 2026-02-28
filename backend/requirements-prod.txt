@@ -1,4 +1,0 @@
-# uvicorn is used as the production server
-# it's outsourced to this extra file since it is not required for development and doesn't run on windows
-uvicorn==0.38.0
-uvloop==0.22.1

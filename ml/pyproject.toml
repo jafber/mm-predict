@@ -1,0 +1,16 @@
+[project]
+name = "myeloma-predict-ml"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "lifelines",
+    "scikit-survival",
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "jupyterlab",
+    "myeloma-predict-core",
+]
+
+[tool.uv.sources]
+myeloma-predict-core = { path = "..", editable = true }

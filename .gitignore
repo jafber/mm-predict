@@ -6,3 +6,4 @@ dist/
 img/
 models/
 *.egg-info/
+notes.ipynb

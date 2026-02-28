@@ -65,9 +65,9 @@ class CoxBootstrapBundle:
         lower = np.percentile(boot_curves, 100 * alpha / 2, axis=0)
         upper = np.percentile(boot_curves, 100 * (1 - alpha / 2), axis=0)
 
-        return {
-            "times": self.times,
+        return pd.DataFrame({
+            "time": self.times,
             "risk": cum_hat,
             "ci_lower": lower,
             "ci_upper": upper,
-        }
+        }).set_index("time")

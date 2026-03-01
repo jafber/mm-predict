@@ -25,6 +25,9 @@ services:
     image: caddy:2.11
     ports:
       - "5173:5173"
+    depends_on:
+      - backend
+      - frontend
     volumes:
-      - $PWD/Caddyfile:/etc/caddy/conf
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
   

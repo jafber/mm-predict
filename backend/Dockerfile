@@ -17,6 +17,9 @@ COPY core/ core/
 COPY backend/pyproject.toml backend/
 RUN cd backend && uv sync --no-dev
 
+# Copy trained model
+COPY ml/models/cox_bootstrap_bundle.pkl ml/models/cox_bootstrap_bundle.pkl
+
 # Copy backend source
 COPY backend/*.py backend/
 

@@ -8,19 +8,12 @@ import type { PatientFeatures } from "../types";
 import SelectField from "./SelectField";
 import NumberField from "./NumberField";
 
-export const DEFAULT_FEATURES: PatientFeatures = {
-  Ancestry: 1,
-  Age: 65,
-  M_Spike: 0.5,
-  sFLC_Ratio: 1.5,
-  Creatinine: 1.0,
-};
-
 interface Props {
-  onChange: (features?: PatientFeatures) => void;
+  initialValues: PatientFeatures;
+  onChange: (features: PatientFeatures | null) => void;
 }
 
-function FormObserver({ onChange }: {onChange: (features?: PatientFeatures) => void}) {
+function FormObserver({ onChange }: {onChange: (features: PatientFeatures | null) => void}) {
   // https://javascript.plainenglish.io/how-to-listen-to-formik-onchange-event-in-react-df00c4d09be
   // also see https://github.com/jaredpalmer/formik/issues/271
   const { values, isValid } = useFormikContext();
@@ -28,15 +21,15 @@ function FormObserver({ onChange }: {onChange: (features?: PatientFeatures) => v
     if (isValid) {
       onChange(values as PatientFeatures);
     } else {
-      onChange();
+      onChange(null);
     }
   }, [values, isValid]);
   return null;
 };
 
-export default function PatientForm({ onChange }: Props) {
+export default function PatientForm({ initialValues, onChange }: Props) {
   return (
-    <Formik initialValues={DEFAULT_FEATURES} onSubmit={() => {}}>
+    <Formik initialValues={initialValues} onSubmit={() => {}}>
       <Form className="space-y-5">
         <h2 className="text-lg font-semibold text-gray-900">Biomarker Information</h2>
         <FormObserver onChange={ onChange } />

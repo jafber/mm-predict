@@ -24,11 +24,9 @@ class CoxBootstrapBundle:
         self,
         real_model,
         bootstrap_models,
-        times,
     ):
         self.real_model = real_model
         self.bootstrap_models = bootstrap_models
-        self.times = np.asarray(times)
 
     def save(self, path: str):
         with open(path, "wb") as f:
@@ -44,12 +42,13 @@ class CoxBootstrapBundle:
 
         return obj
 
-    def predict_cumulative_incidence(self, patient_features: PatientFeatures, alpha=0.05):
+    def predict_cumulative_incidence(self, patient_features: PatientFeatures, alpha=0.05, max_time=10, samples=100):
+        times = np.linspace(0, max_time, num=samples)
 
         # Point estimate
         surv_hat = self.real_model.predict_survival_function(
             patient_features.to_series(),
-            times=self.times
+            times=times
         )
         cum_hat = 1.0 - surv_hat[0].values
 
@@ -58,7 +57,7 @@ class CoxBootstrapBundle:
         for m in self.bootstrap_models:
             s = m.predict_survival_function(
                 patient_features.to_series(),
-                times=self.times
+                times=times
             )
             boot_curves.append(1.0 - s.values.flatten())
         boot_curves = np.asarray(boot_curves)
@@ -66,7 +65,7 @@ class CoxBootstrapBundle:
         upper = np.percentile(boot_curves, 100 * (1 - alpha / 2), axis=0)
 
         return pd.DataFrame({
-            "time": self.times,
+            "time": times,
             "risk": cum_hat,
             "ci_lower": lower,
             "ci_upper": upper,

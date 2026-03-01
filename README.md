@@ -17,7 +17,7 @@ uv --version # uv 0.10.7 (08ab1a344 2026-02-27)
 node --version # v22.21.1
 ```
 
-> **Note:** The `/core` package defines a set of common Python classes used both in the backend and for model training. `/core` is specified as a dependency in [ml/pyproject.toml](ml/pyproject.toml) and [backend/pyproject.toml](backend/pyproject.toml) respectively. Using uv is highly recommended since it automatically resolves this dependency by looking at the `pyproject.toml` files. 
+> **Note:** The `/core` package defines a set of common Python classes used both in the backend and for model training. `/core` is specified as a dependency in [ml/pyproject.toml](ml/pyproject.toml) and [backend/pyproject.toml](backend/pyproject.toml) respectively. Using uv to manage your Python environments is highly recommended since it automatically resolves this dependency by looking at the `pyproject.toml` files. 
 
 ### ML / Jupyter Notebooks
 

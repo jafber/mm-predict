@@ -36,9 +36,6 @@ real_model.fit(
     event_col=event_col
 )
 
-# Fix the time grid from the real model
-times = real_model.baseline_survival_.index.values
-
 # -----------------------
 # Fit bootstrap models
 # -----------------------
@@ -59,6 +56,6 @@ for b in range(BOOTSTRAP_RUNS):
 # -----------------------
 # Package artifacts
 # -----------------------
-bundle = CoxBootstrapBundle(real_model, bootstrap_models, times)
+bundle = CoxBootstrapBundle(real_model, bootstrap_models)
 bundle.save(OUTPUT_PATH)
 print(f"Saved {1 + BOOTSTRAP_RUNS} Cox models to {OUTPUT_PATH}")

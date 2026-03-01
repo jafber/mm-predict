@@ -10,9 +10,7 @@ import {
 } from "recharts";
 import type { PredictionResponse } from "../types";
 
-interface Props {
-  prediction: PredictionResponse;
-}
+type Props = { prediction: PredictionResponse } | { error: string };
 
 interface ChartDataPoint {
   time: number;
@@ -44,8 +42,16 @@ function getRiskLevel(risk: number) {
   return { label: "High", className: "text-red-600 font-bold" };
 }
 
-export default function PredictionResult({ prediction }: Props) {
-  const { time, risk, ci_lower, ci_upper } = prediction;
+export default function PredictionResult(props: Props) {
+  if ("error" in props) {
+    return (
+      <div className="bg-red-50 border border-red-200 text-red-700 rounded-md p-3 text-sm">
+        {props.error}
+      </div>
+    );
+  }
+
+  const { time, risk, ci_lower, ci_upper } = props.prediction;
 
   const chartData: ChartDataPoint[] = time.map((t, i) => ({
     time: Number(t.toFixed(2)),

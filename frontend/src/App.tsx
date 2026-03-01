@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import PatientForm from "./components/PatientForm";
 import PredictionResult from "./components/PredictionResult";
+import PredictionError from "./components/PredictionError";
 import PredictionSkeleton from "./components/PredictionSkeleton";
 import type { PatientFeatures, PredictionResponse } from "./types";
 import { requestPrediction } from "./api";
@@ -38,25 +39,25 @@ export default function App() {
   } else if (features) {
     resultContent = <PredictionSkeleton />;
   } else {
-    resultContent = <PredictionResult error="Please fix the form errors before a prediction can be calculated." />;
+    resultContent = <PredictionError error="Please fix the form errors before a prediction can be calculated." />;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-teal-700 text-white py-4 px-6 shadow">
+    <div className="h-screen flex flex-col bg-gray-50">
+      <header className="bg-teal-700 text-white py-4 px-6 shadow shrink-0">
         <h1 className="text-2xl font-bold">Myeloma Predict</h1>
-        <p className="text-sm text-teal-100 mt-0.5">
-          Risk calculator for progression to multiple myeloma
+        <p className="text-teal-100 mt-0.5">
+          Risk calculator for progression from MGUS / SMM to multiple myeloma
         </p>
       </header>
 
-      <main className="max-w-6xl mx-auto p-4 sm:p-6 mt-4">
-        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
+      <main className="lg:flex-1 lg:overflow-hidden max-w-6xl w-full mx-auto p-4 sm:p-6 lg:py-6 lg:flex lg:flex-col">
+        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] lg:flex-1 lg:overflow-hidden gap-6">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 lg:overflow-y-auto">
             <PatientForm initialValues={DEFAULT_FEATURES} onChange={setFeatures} />
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 min-h-[400px]">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 lg:overflow-y-auto">
             {resultContent}
           </div>
         </div>

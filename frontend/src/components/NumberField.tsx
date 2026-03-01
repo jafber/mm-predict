@@ -18,7 +18,7 @@ export default function NumberField({name, title, unitTitle, min, max, step}: {n
       <FieldLabel name={name} title={title} unitTitle={unitTitle} />
       <input type="number" id={name} step={step} className={meta.error ? "input-errored" : "input-normal"} {...field} />
       {meta.error && 
-        <p className="text-red-500 text-xs mt-1">{meta.error}</p>
+        <p className="text-red-500 mt-1">{meta.error}</p>
       }
     </div>
   )

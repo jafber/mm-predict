@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import type { PredictionResponse } from "../types";
 
-type Props = { prediction: PredictionResponse } | { error: string };
+type Props = { prediction: PredictionResponse };
 
 interface ChartDataPoint {
   time: number;
@@ -42,16 +42,8 @@ function getRiskLevel(risk: number) {
   return { label: "High", className: "text-red-600 font-bold" };
 }
 
-export default function PredictionResult(props: Props) {
-  if ("error" in props) {
-    return (
-      <div className="bg-red-50 border border-red-200 text-red-700 rounded-md p-3 text-sm">
-        {props.error}
-      </div>
-    );
-  }
-
-  const { time, risk, ci_lower, ci_upper } = props.prediction;
+export default function PredictionResult({ prediction }: Props) {
+  const { time, risk, ci_lower, ci_upper } = prediction;
 
   const chartData: ChartDataPoint[] = time.map((t, i) => ({
     time: Number(t.toFixed(2)),
@@ -89,10 +81,10 @@ export default function PredictionResult(props: Props) {
       )}
 
       {tableRows.length > 0 && (
-        <table className="w-full text-sm">
+        <table className="w-full">
           <thead>
             <tr className="border-b border-gray-300">
-              <th className="text-left py-2 font-semibold text-gray-900">
+              <th className="text-left py-2 font-semibold text-gray-900 w-0 whitespace-nowrap pr-6">
                 Years in Future
               </th>
               <th className="text-left py-2 font-semibold text-gray-900">
@@ -103,7 +95,7 @@ export default function PredictionResult(props: Props) {
           <tbody>
             {tableRows.map(({ year, prob }) => (
               <tr key={year} className="border-b border-gray-200">
-                <td className="py-2 text-gray-700">{year}</td>
+                <td className="py-2 text-gray-700 w-0 whitespace-nowrap pr-6">{year}</td>
                 <td className="py-2 text-gray-700">
                   {(prob * 100).toFixed(1)}%
                 </td>
@@ -131,7 +123,6 @@ export default function PredictionResult(props: Props) {
                 value: "Years in Future",
                 position: "insideBottom",
                 offset: -15,
-                style: { fontSize: 13 },
               }}
             />
             <YAxis
@@ -143,7 +134,7 @@ export default function PredictionResult(props: Props) {
                 angle: -90,
                 position: "insideLeft",
                 offset: 5,
-                style: { textAnchor: "middle", fontSize: 13 },
+                style: { textAnchor: "middle" },
               }}
             />
             <Tooltip
@@ -153,7 +144,7 @@ export default function PredictionResult(props: Props) {
                 if (!entry) return null;
                 const point = entry.payload as ChartDataPoint;
                 return (
-                  <div className="bg-white border border-gray-200 px-3 py-2 rounded shadow text-sm">
+                  <div className="bg-white border border-gray-200 px-3 py-2 rounded shadow">
                     <p className="font-medium">Year {point.time.toFixed(1)}</p>
                     <p style={{ color: "#dc2626" }}>
                       Risk: {(Number(entry.value) * 100).toFixed(1)}%

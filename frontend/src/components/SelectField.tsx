@@ -5,7 +5,7 @@ export default function SelectField({name, title, children}: {name: string, titl
   return (
     <div>
       <FieldLabel name={name} title={title} />
-      <Field id={name} as="select" className="input-normal">
+      <Field id={name} name={name} as="select" className="input-normal">
         {children}
       </Field>
     </div>

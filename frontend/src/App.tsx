@@ -3,6 +3,8 @@ import PatientForm from "./components/PatientForm";
 import PredictionResult from "./components/PredictionResult";
 import PredictionError from "./components/PredictionError";
 import PredictionSkeleton from "./components/PredictionSkeleton";
+import AboutSection from "./components/AboutSection";
+import GitHubIcon from "./icons/github.svg?react";
 import type { PatientFeatures, PredictionResponse } from "./types";
 import { requestPrediction } from "./api";
 
@@ -43,25 +45,48 @@ export default function App() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
-      <header className="bg-teal-700 text-white py-4 px-6 shadow shrink-0">
-        <h1 className="text-2xl font-bold">Myeloma Predict</h1>
-        <p className="text-teal-100 mt-0.5">
-          Risk calculator for progression from MGUS / SMM to multiple myeloma
-        </p>
+    <>
+      <header className="bg-teal-700 text-white shadow shrink-0 flex justify-center">
+        <div className="max-w-6xl w-full py-4 px-6 gap-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold">Myeloma Predict</h1>
+            <p className="text-teal-100 mt-0.5">
+              Risk calculator for progression from MGUS / SMM to multiple myeloma
+            </p>
+          </div>
+          <a
+            href="https://github.com/jafber/myeloma-predict"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-teal-100 hover:text-white"
+          >
+            <GitHubIcon className="size-8 lg:size-6 flex-none" />
+            <span className="hidden lg:inline">View on GitHub</span>
+          </a>
+        </div>
       </header>
-
-      <main className="lg:flex-1 lg:overflow-hidden max-w-6xl w-full mx-auto p-4 sm:p-6 lg:py-6 lg:flex lg:flex-col">
-        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] lg:flex-1 lg:overflow-hidden gap-6">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 lg:overflow-y-auto">
+      <div className="bg-gray-50 flex justify-center">
+        <main className="max-w-6xl w-full p-4 grid gap-4 lg:py-6 lg:grid-cols-[340px_1fr] lg:grid-rows-[48rem_auto]">
+          <div className="tile lg:overflow-y-auto">
             <PatientForm initialValues={DEFAULT_FEATURES} onChange={setFeatures} />
           </div>
 
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 lg:overflow-y-auto">
+          <div className="tile lg:overflow-y-auto">
             {resultContent}
           </div>
+
+          <div className="tile lg:col-span-2">
+            <AboutSection />
+          </div>
+        </main>
+      </div>
+      <footer className="bg-teal-700 text-white shadow shrink-0 flex justify-center">
+        <div className="max-w-6xl w-full py-4 px-6 text-teal-100 flex flex-col gap-2">
+          <a className="hover:text-white" href="https://jan-berndt.de/pages/impressum/">Impressum</a>
+          <a className="hover:text-white" href="https://jan-berndt.de/pages/datenschutz/">Datenschutz</a>
+          <p className="text-white">This is a demo for research purposes only and does not consitute medical advice.</p>
         </div>
-      </main>
-    </div>
+      </footer>
+    </>
   );
 }

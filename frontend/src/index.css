@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+    @apply bg-teal-700;
+}
+
 .input-normal,
 .input-errored {
     @apply w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2;
@@ -11,4 +15,8 @@
 
 .input-errored {
     @apply border-red-400 focus:ring-red-400 focus:border-red-400;
+}
+
+.tile {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-5;
 }

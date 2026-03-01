@@ -30,7 +30,7 @@ function FormObserver({ onChange }: {onChange: (features: PatientFeatures | null
 export default function PatientForm({ initialValues, onChange }: Props) {
   return (
     <Formik initialValues={initialValues} onSubmit={() => {}}>
-      <Form className="space-y-5">
+      <Form className="flex flex-col gap-6">
         <h2 className="text-lg font-semibold text-gray-900">Biomarker Information</h2>
         <FormObserver onChange={ onChange } />
         <SelectField name="Ancestry" title="Ancestry">

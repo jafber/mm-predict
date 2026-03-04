@@ -18,7 +18,7 @@ COPY backend/pyproject.toml backend/
 RUN cd backend && uv sync --no-dev
 
 # Copy trained models
-COPY ml/models/mm_pgs.pkl ml/models/mm_pgs.pkl
+COPY ml/models/mm_pgs_bin.pkl ml/models/mm_pgs_bin.pkl
 COPY ml/models/mm_nopgs.pkl ml/models/mm_nopgs.pkl
 
 # Copy backend source

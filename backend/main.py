@@ -2,12 +2,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Request
 from core.artifacts import PatientFeatures, CoxBootstrapBundle
+from pathlib import Path
 
 LOCAL_VITE_APP = "http://localhost:5173"
-MODEL_PATH = "../ml/models/cox_bootstrap_bundle.pkl"
+MODEL_ROOT_PATH = Path("../ml/models")
 
 app = FastAPI()
-cox_bootstrap = CoxBootstrapBundle.load(MODEL_PATH)
+mm_nopgs = CoxBootstrapBundle.load(MODEL_ROOT_PATH / "mm_nopgs.pkl")
+mm_pgs = CoxBootstrapBundle.load(MODEL_ROOT_PATH / "mm_pgs_bin.pkl")
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,7 +33,10 @@ async def mm_predict(request: Request):
 
     try:
         user_data = PatientFeatures(**body)
-        prediction_df = cox_bootstrap.predict_cumulative_incidence(user_data)
+        if body.get("pgs_bin") is not None:
+            prediction_df = mm_pgs.predict_cumulative_incidence(user_data)
+        else:
+            prediction_df = mm_nopgs.predict_cumulative_incidence(user_data)
     except Exception as e:
         print(f'got error {e} on input {body}')
         return 400

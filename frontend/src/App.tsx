@@ -9,11 +9,11 @@ import type { PatientFeatures, PredictionResponse } from "./types";
 import { requestPrediction } from "./api";
 
 const DEFAULT_FEATURES: PatientFeatures = {
-  Ancestry: 1,
-  Age: 65,
-  M_Spike: 0.5,
-  sFLC_Ratio: 1.5,
-  Creatinine: 1.0,
+  age: 65,
+  m_spike: 0.5,
+  sflc_ratio: 1.5,
+  creatinine: 1.0,
+  pgs_bin: null,
 };
 
 export default function App() {

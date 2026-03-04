@@ -6,3 +6,4 @@ dist/
 img/
 *.egg-info/
 notes.ipynb
+ml/img/

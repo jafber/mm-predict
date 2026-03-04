@@ -6,7 +6,8 @@
       "Bash(npm run build:*)",
       "Bash(uv:*)",
       "Bash(grep:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "WebSearch"
     ]
   }
 }

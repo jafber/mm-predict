@@ -1055,7 +1055,7 @@ wheels = [
 ]
 
 [[package]]
-name = "myeloma-predict-core"
+name = "mm-predict-core"
 version = "0.1.0"
 source = { editable = "../" }
 dependencies = [
@@ -1074,14 +1074,14 @@ requires-dist = [
 ]
 
 [[package]]
-name = "myeloma-predict-ml"
+name = "mm-predict-ml"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "jupyterlab" },
     { name = "lifelines" },
     { name = "matplotlib" },
-    { name = "myeloma-predict-core" },
+    { name = "mm-predict-core" },
     { name = "numpy" },
     { name = "pandas" },
     { name = "scikit-survival" },
@@ -1092,7 +1092,7 @@ requires-dist = [
     { name = "jupyterlab" },
     { name = "lifelines" },
     { name = "matplotlib" },
-    { name = "myeloma-predict-core", editable = "../" },
+    { name = "mm-predict-core", editable = "../" },
     { name = "numpy" },
     { name = "pandas" },
     { name = "scikit-survival" },

@@ -18,7 +18,7 @@ export default function AboutSection() {
         </p>
       </div>
       <a
-          href="https://github.com/jafber/myeloma-predict/blob/main/paper.pdf"
+          href="https://github.com/jafber/mm-predict/blob/main/paper.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 self-start rounded-md bg-teal-700 px-4 py-2 text-white hover:bg-teal-800"

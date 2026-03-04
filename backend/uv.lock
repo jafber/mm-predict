@@ -651,12 +651,12 @@ wheels = [
 ]
 
 [[package]]
-name = "myeloma-predict-backend"
+name = "mm-predict-backend"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi", extra = ["standard"] },
-    { name = "myeloma-predict-core" },
+    { name = "mm-predict-core" },
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "scikit-survival" },
@@ -667,7 +667,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", extras = ["standard"] },
-    { name = "myeloma-predict-core", editable = "../" },
+    { name = "mm-predict-core", editable = "../" },
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "scikit-survival" },
@@ -676,7 +676,7 @@ requires-dist = [
 ]
 
 [[package]]
-name = "myeloma-predict-core"
+name = "mm-predict-core"
 version = "0.1.0"
 source = { editable = "../" }
 dependencies = [

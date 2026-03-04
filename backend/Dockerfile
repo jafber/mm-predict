@@ -1,5 +1,5 @@
 # Build context must be the project root (not ./backend) so core/ is accessible.
-# docker build -t jafber/myeloma-predict-backend -f backend/Dockerfile .
+# docker build -t jafber/mm-predict-backend -f backend/Dockerfile .
 
 FROM python:3.13-slim
 

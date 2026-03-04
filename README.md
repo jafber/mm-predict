@@ -1,6 +1,6 @@
-## Myeloma-Predict
+## MM-Predict
 
-Myeloma-predict is an interactive calculator to visualize the risk of developing multiple myeloma (a type of blood cancer) based on key biomarkers and individual genetic predisposition. See it in action at [myeloma-predict.jan-berndt.de](https://myeloma-predict.jan-berndt.de)!
+MM-predict is an interactive calculator to visualize the risk of developing multiple myeloma (a type of blood cancer) based on key biomarkers and individual genetic predisposition. See it in action at [mm-predict.jan-berndt.de](https://mm-predict.jan-berndt.de)!
 
 ### Quick Start
 
@@ -62,12 +62,12 @@ npm run dev
 
 ## Deployment to Coolify
 
-This app is deployed to https://myeloma-predict.jan-berndt.de/ using [Coolify](https://coolify.io/), a self-hosted platform for serving web applications.
+This app is deployed to https://mm-predict.jan-berndt.de/ using [Coolify](https://coolify.io/), a self-hosted platform for serving web applications.
 To deploy, simply:
 
-- Create a new application from https://github.com/jafber/myeloma-predict
+- Create a new application from https://github.com/jafber/mm-predict
 - Choose `docker-compose-coolify.yml` for the deployment
-- Assign `https://myeloma-predict.jan-berndt.de` to the frontend container and `https://myeloma-predict.jan-berndt.de:8000/api` to the backend
+- Assign `https://mm-predict.your-domain.com` to the frontend container and `https://mm-predict.your-domain.com:8000/api` to the backend
 
 ---
 

@@ -2,7 +2,7 @@
 # See https://coolify.io/docs/knowledge-base/docker/compose
 services:
   backend:
-    image: jafber/myeloma-predict-backend
+    image: jafber/mm-predict-backend
     build:
       context: .
       dockerfile: backend/Dockerfile
@@ -11,7 +11,7 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
 
   frontend:
-    image: jafber/myeloma-predict-frontend
+    image: jafber/mm-predict-frontend
     build:
       context: ./frontend
     restart: always

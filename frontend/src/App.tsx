@@ -49,13 +49,13 @@ export default function App() {
       <header className="bg-teal-700 text-white shadow shrink-0 flex justify-center">
         <div className="max-w-6xl w-full py-4 px-6 gap-6 flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">Myeloma Predict</h1>
+            <h1 className="text-2xl font-bold">MM-Predict</h1>
             <p className="text-teal-100 mt-0.5">
               Risk calculator for progression from MGUS / SMM to multiple myeloma
             </p>
           </div>
           <a
-            href="https://github.com/jafber/myeloma-predict"
+            href="https://github.com/jafber/mm-predict"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-teal-100 hover:text-white"

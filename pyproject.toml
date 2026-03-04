@@ -1,5 +1,5 @@
 [project]
-name = "myeloma-predict-core"
+name = "mm-predict-core"
 version = "0.1.0"
 dependencies = [
     "pydantic",

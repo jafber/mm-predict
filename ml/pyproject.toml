@@ -1,5 +1,5 @@
 [project]
-name = "myeloma-predict-ml"
+name = "mm-predict-ml"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
@@ -9,8 +9,8 @@ dependencies = [
     "numpy",
     "matplotlib",
     "jupyterlab",
-    "myeloma-predict-core",
+    "mm-predict-core",
 ]
 
 [tool.uv.sources]
-myeloma-predict-core = { path = "..", editable = true }
+mm-predict-core = { path = "..", editable = true }

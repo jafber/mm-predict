@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Myeloma-Predict is an interactive calculator that visualizes the risk of developing multiple myeloma based on biomarkers and genetic predisposition. It uses Cox Proportional Hazards survival analysis with bootstrap confidence intervals.
+MM-Predict is an interactive calculator that visualizes the risk of developing multiple myeloma based on biomarkers and genetic predisposition. It uses Cox Proportional Hazards survival analysis with bootstrap confidence intervals.
 
-Live demo: https://myeloma-predict.jan-berndt.de
+Live demo: https://mm-predict.jan-berndt.de
 
 ## Common Commands
 
@@ -119,7 +119,7 @@ PredictionResponse { time: number[]; risk: number[]; ci_lower: number[]; ci_uppe
 
 ## Key Technical Details
 
-- **Package manager:** [uv](https://docs.astral.sh/uv/). Each subproject (`backend/`, `ml/`) has its own `pyproject.toml` and `.venv`. Both declare `myeloma-predict-core` as an editable local dependency via `[tool.uv.sources]`.
+- **Package manager:** [uv](https://docs.astral.sh/uv/). Each subproject (`backend/`, `ml/`) has its own `pyproject.toml` and `.venv`. Both declare `mm-predict-core` as an editable local dependency via `[tool.uv.sources]`.
 - **scikit-survival** requires a C++ compiler (Visual C++ on Windows, build-essential on Linux). The backend Dockerfile installs build-essential for this.
 - Python version: 3.13 (per Dockerfile)
 - Core package defined in root `pyproject.toml`: pydantic, numpy, pandas, lifelines
